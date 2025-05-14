@@ -841,6 +841,7 @@ class AgentController:
                 if (
                     'contextwindowexceedederror' in error_str
                     or 'prompt is too long' in error_str
+                    or 'Could not finish the message because max_tokens or model output limit was reached.' in error_str
                     or 'input length and `max_tokens` exceed context limit' in error_str
                     or 'please reduce the length of either one'
                     in error_str  # For OpenRouter context window errors

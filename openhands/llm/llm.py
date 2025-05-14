@@ -155,6 +155,7 @@ class LLM(RetryMixin, DebugMixin):
         kwargs: dict[str, Any] = {
             'temperature': self.config.temperature,
             'max_completion_tokens': self.config.max_output_tokens,
+            'max_tokens': self.config.max_output_tokens
         }
         if (
             self.config.model.lower() in REASONING_EFFORT_SUPPORTED_MODELS
@@ -169,6 +170,7 @@ class LLM(RetryMixin, DebugMixin):
             kwargs['max_tokens'] = self.config.max_output_tokens
             kwargs.pop('max_completion_tokens')
 
+        logger.debug(f"LLM call with kwargs: {kwargs}")
         self._completion = partial(
             litellm_completion,
             model=self.config.model,
